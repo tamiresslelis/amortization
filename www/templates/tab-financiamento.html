@@ -1,11 +1,38 @@
 <ion-view view-title="Financiamento">
 
   <ion-content class="padding">
+
+<form ng-submit="submit()">
+  <div class="form-group">
+    <label>Valor financiado:</label>
+    <input type="digit" class="form-control" name="valorFinanciado" placeholder="numérico" ng-model="model.valorFinanciado" currency-symbol="R$" ui-money-mask required>
+  </div>
+  <div class="form-group">
+    <label>Taxa de juros anual(*):</label>
+    <input type="digit" class="form-control" name="juros" placeholder="0.0000" ng-model="model.juros" ui-percentage-mask="4" required>
+  </div>
+  <div class="form-group">
+    <label>Quantidade de meses(*):</label>
+    <input type="digit" class="form-control" name="periodo" placeholder="numérico"  ng-model="model.periodo" required>
+  </div>
+  <div class="form-group">
+    <label class="input-label" name="tabela">Tabela(*)</label>
+      <select ng-init="model.tabela = model.tabela || 'none'" ng-model="model.tabela" class="form-control">
+        <option value="none">Selecione</option>
+        <option value="price">PRICE</option>
+        <option value="sac">SAC</option>
+      </select>
+    </div>
+
+  <button type="submit" class="btn btn-success btn-lg btn-block">Gerar</button>
+</form>
+
+<!---
     <form class="list"  ng-submit="submit()">
       <label class="item item-input">
         <span class="input-label">Valor financiado(*)</span>
-        <input type="digit" name="valorFinanciado" id="currency" ng-model="model.valorFinanciado" currency-symbol="R$" placeholder="numérico" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal="," onclick="mascara()"/>
-        <!--<input type="digit"  name="valorFinanciado" placeholder="numérico" ng-model="model.valorFinanciado" currency-symbol="R$" ui-money-mask required>-->
+        <input type="digit" name="valorFinanciado" id="currency" ng-model="model.valorFinanciado" currency-symbol="R$" placeholder="numérico" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal="," ng-click="mascara()"/>
+        <input type="digit"  name="valorFinanciado" placeholder="numérico" ng-model="model.valorFinanciado" currency-symbol="R$" ui-money-mask required>
       </label>
       <label class="item item-input">
         <span class="input-label">Taxa de juros anual(*)</span>
@@ -13,7 +40,7 @@
       </label>
       <label class="item item-input ">
         <span class="input-label">Quantidade de meses(*)</span>
-        <input type="digit" name="periodo" placeholder="númerico"  ng-model="model.periodo" required>
+        <input type="digit" name="periodo" placeholder="numérico"  ng-model="model.periodo" required>
       </label>
       <label class="item item-input ">
         <span class="input-label" name="tabela">Tabela(*)</span>
@@ -23,8 +50,44 @@
             <option value="sac">SAC</option>
           </select>
       </label>
-      <button class="button button-balanced button-block" type="submit">Gerar</button>
+
+      <button type="button" class="btn btn-success btn-lg btn-block" type="submit">Block level button</button>
+
     </form>
+  -->
+  <div class="table-responsive-sm">
+    <table class="table">
+      <thead  ng-show="grid.length">
+        <tr class="thead-dark">
+          <th scope="col">Valor total de juros</div>
+          <th scope="col">Valor total de prestações</div>
+        </tr>
+      <tr ng-repeat="g in grid" ng-if="$last">
+        <th class="table-danger"> R$ {{g.totalJuros}}</td>
+        <th class="table-light"> R$ {{g.totalParcelas}}</td>
+      </tr>
+      </thead>
+    </table>
+
+  </div>
+    <table class="Tabela1">
+        <thead ng-show="grid.length">
+          <tr class="titleTabela">
+            <td>Período</td>
+            <td>Parcela de juros</td>
+            <td>Prestação</td>
+            <td>Saldo devedor</td>
+          </tr>
+        </thead>
+        <tr ng-repeat="g in grid">
+        <td> {{g.periodo}} </td>
+        <td>R$ {{g.taxa}}</td>
+        <td class="bg-warning">R$ {{g.prestacao}}</td>
+        <td>R$ {{g.saldoDevedor}}</td>
+      </tr>
+      <table>
+
+</div>
 
   </ion-content>
 </ion-view>

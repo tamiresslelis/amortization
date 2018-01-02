@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@ionic/discover": "^0.4.0",
+    "angular-input-masks": "^4.1.0",
     "cordova-browser": "~5.0.2",
     "cordova-plugin-device": "^1.1.4",
     "cordova-plugin-ionic-webview": "^1.1.16",
