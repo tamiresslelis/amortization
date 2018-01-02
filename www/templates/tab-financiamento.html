@@ -1,14 +1,30 @@
 <ion-view view-title="Financiamento">
-  <ion-content>
-    <div class="list">
+
+  <ion-content class="padding">
+    <form class="list"  ng-submit="submit()">
       <label class="item item-input">
-        <span class="input-label">Username</span>
-        <input type="text">
+        <span class="input-label">Valor financiado(*)</span>
+        <input type="digit" name="valorFinanciado" id="currency" ng-model="model.valorFinanciado" currency-symbol="R$" placeholder="numérico" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal="," onclick="mascara()"/>
+        <!--<input type="digit"  name="valorFinanciado" placeholder="numérico" ng-model="model.valorFinanciado" currency-symbol="R$" ui-money-mask required>-->
       </label>
       <label class="item item-input">
-        <span class="input-label">Password</span>
-        <input type="password">
+        <span class="input-label">Taxa de juros anual(*)</span>
+        <input type="digit" name="juros" placeholder="0.0000" ng-model="model.juros" ui-percentage-mask="4" required>
       </label>
-    </div>
+      <label class="item item-input ">
+        <span class="input-label">Quantidade de meses(*)</span>
+        <input type="digit" name="periodo" placeholder="númerico"  ng-model="model.periodo" required>
+      </label>
+      <label class="item item-input ">
+        <span class="input-label" name="tabela">Tabela(*)</span>
+          <select ng-init="model.tabela = model.tabela || 'none'" ng-model="model.tabela">
+            <option value="none">Selecione</option>
+            <option value="price">PRICE</option>
+            <option value="sac">SAC</option>
+          </select>
+      </label>
+      <button class="button button-balanced button-block" type="submit">Gerar</button>
+    </form>
+
   </ion-content>
 </ion-view>
