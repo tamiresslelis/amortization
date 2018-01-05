@@ -2,92 +2,76 @@
 
   <ion-content class="padding">
 
-<form ng-submit="submit()">
-  <div class="form-group">
-    <label>Valor financiado:</label>
-    <input type="digit" class="form-control" name="valorFinanciado" placeholder="numérico" ng-model="model.valorFinanciado" currency-symbol="R$" ui-money-mask required>
+<form ng-submit="submit()" name="myForm" novalidate>
+  <div class="form-group row" >
+    <label  class="col-7 col-sm-4  col-form-label required" ng-class="{ 'has-error' : myForm.valorFinanciado.$invalid && (myForm.$submitted || myForm.valorFinanciado.$touched)}" ><strong>Valor financiado</strong></label>
+    <div class="col-5 col-sm-4">
+      <input type="digit" id="currency" class="form-control" name="valorFinanciado" placeholder="R$0.000,00"  ng-model="model.valorFinanciado" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal=","  ng-click="mascara()"  required>
+    </div>
+    <span style="color:red" class="has-error-msg" ng-show="myForm.valorFinanciado.$error.required && (myForm.$submitted || myForm.valorFinanciado.$touched)">Por favor, informe o valor financiado.</span>
   </div>
-  <div class="form-group">
-    <label>Taxa de juros anual(*):</label>
-    <input type="digit" class="form-control" name="juros" placeholder="0.0000" ng-model="model.juros" ui-percentage-mask="4" required>
+  <div class="form-group row">
+    <label class="col-7 col-sm-4 col-form-label required" ng-class="{ 'has-error' : myForm.juros.$invalid && (myForm.$submitted || myForm.juros.$touched)}"><strong>Taxa de juros anual</strong></label>
+    <div class="col-5 col-sm-4">
+      <input type="digit" class="form-control" name="juros" placeholder="0.0000%" ng-model="model.juros" ui-percentage-mask="4" required>
+    </div>
+    <span style="color:red" class="has-error-msg" ng-show="myForm.juros.$error.required && (myForm.$submitted || myForm.juros.$touched)">Por favor, informe a taxa de juros.</span>
   </div>
-  <div class="form-group">
-    <label>Quantidade de meses(*):</label>
-    <input type="digit" class="form-control" name="periodo" placeholder="numérico"  ng-model="model.periodo" required>
+  <div class="form-group row">
+    <label  class="col-7 col-sm-4 col-form-label required" ng-class="{ 'has-error' : myForm.periodo.$invalid && (myForm.$submitted || myForm.periodo.$touched)}"><strong>Quantos de meses</strong></label>
+    <div class="col-5 col-sm-4">
+      <input type="number" class="form-control" name="periodo" placeholder="numérico"  ng-model="model.periodo" required>
+    </div>
+    <span style="color:red" class="has-error-msg" ng-show="myForm.periodo.$error.required && (myForm.$submitted || myForm.periodo.$touched)">Por favor, informe a quantidade de meses.</span>
   </div>
-  <div class="form-group">
-    <label class="input-label" name="tabela">Tabela(*)</label>
-      <select ng-init="model.tabela = model.tabela || 'none'" ng-model="model.tabela" class="form-control">
+  <div class="form-group row">
+    <label class="col-7 col-sm-4 col-form-label input-label required"ng-class="{ 'has-error' : myForm.tabela.$invalid && (myForm.$submitted || myForm.tabela.$touched)}"  name="tabela"><strong>Tabela</strong></label>
+  <div class="col-5 col-sm-4">
+      <select ng-init="model.tabela = model.tabela || 'none'" ng-model="model.tabela" class="form-control" required>
         <option value="none">Selecione</option>
         <option value="price">PRICE</option>
         <option value="sac">SAC</option>
       </select>
     </div>
-
+    </div>
   <button type="submit" class="btn btn-success btn-lg btn-block">Gerar</button>
 </form>
 
-<!---
-    <form class="list"  ng-submit="submit()">
-      <label class="item item-input">
-        <span class="input-label">Valor financiado(*)</span>
-        <input type="digit" name="valorFinanciado" id="currency" ng-model="model.valorFinanciado" currency-symbol="R$" placeholder="numérico" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal="," ng-click="mascara()"/>
-        <input type="digit"  name="valorFinanciado" placeholder="numérico" ng-model="model.valorFinanciado" currency-symbol="R$" ui-money-mask required>
-      </label>
-      <label class="item item-input">
-        <span class="input-label">Taxa de juros anual(*)</span>
-        <input type="digit" name="juros" placeholder="0.0000" ng-model="model.juros" ui-percentage-mask="4" required>
-      </label>
-      <label class="item item-input ">
-        <span class="input-label">Quantidade de meses(*)</span>
-        <input type="digit" name="periodo" placeholder="numérico"  ng-model="model.periodo" required>
-      </label>
-      <label class="item item-input ">
-        <span class="input-label" name="tabela">Tabela(*)</span>
-          <select ng-init="model.tabela = model.tabela || 'none'" ng-model="model.tabela">
-            <option value="none">Selecione</option>
-            <option value="price">PRICE</option>
-            <option value="sac">SAC</option>
-          </select>
-      </label>
 
-      <button type="button" class="btn btn-success btn-lg btn-block" type="submit">Block level button</button>
-
-    </form>
-  -->
   <div class="table-responsive-sm">
     <table class="table">
       <thead  ng-show="grid.length">
         <tr class="thead-dark">
-          <th scope="col">Valor total de juros</div>
-          <th scope="col">Valor total de prestações</div>
+          <th scope="col">Valor total de juros</th>
+          <th scope="col">Valor total de prestações</th>
         </tr>
       <tr ng-repeat="g in grid" ng-if="$last">
-        <th class="table-danger"> R$ {{g.totalJuros}}</td>
-        <th class="table-light"> R$ {{g.totalParcelas}}</td>
+        <th class="table-danger"> R$ {{g.totalJuros}}</th>
+        <th class="table-light"> R$ {{g.totalParcelas}}</th>
       </tr>
       </thead>
     </table>
-
   </div>
-    <table class="Tabela1">
-        <thead ng-show="grid.length">
-          <tr class="titleTabela">
-            <td>Período</td>
-            <td>Parcela de juros</td>
-            <td>Prestação</td>
-            <td>Saldo devedor</td>
-          </tr>
-        </thead>
-        <tr ng-repeat="g in grid">
-        <td> {{g.periodo}} </td>
-        <td>R$ {{g.taxa}}</td>
-        <td class="bg-warning">R$ {{g.prestacao}}</td>
-        <td>R$ {{g.saldoDevedor}}</td>
-      </tr>
-      <table>
 
-</div>
+  <div class="table-responsive-sm">
+    <table class="table table-bordered table-sm">
+      <thead  ng-show="grid.length">
+        <tr class="thead-dark">
+            <th>Período</th>
+            <th>Parcela de juros</th>
+            <th >Prestação</th>
+            <th >Saldo devedor</th>
+          </tr>
+          <tr ng-repeat="g in grid">
+              <th> {{g.periodo}} </th>
+              <th>R$ {{g.taxa}}</th>
+              <th>R$ {{g.prestacao}}</th>
+              <th>R$ {{g.saldoDevedor}}</th>
+            </tr>
+        </thead>
+      </table>
+
+      </div>
 
   </ion-content>
 </ion-view>

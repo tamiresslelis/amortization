@@ -4,22 +4,16 @@ margin*{
   margin: 0;
 }
 
-/*table, th , td  {
-  margin-top: 19px;
-  border: 2px solid #C0C0C0;
-  border-collapse: collapse;
-  padding: 5px;
-  margin-left:auto;
-  margin-right:auto;
-  text-align: center;
-  font-size: 16px;
-}
-.Tabela1{
-  margin-top: 19px;
-}
-.titleTabela{
-  background-color: #87CEEB	;
-}*/
 .table-responsive-sm{
   margin-top: 15px;
+}
+
+.required:after {
+  content:" *";
+  color: red;
+}
+
+.has-error-msg{
+  margin-top:  4px;
+  padding-left: 12px;
 }

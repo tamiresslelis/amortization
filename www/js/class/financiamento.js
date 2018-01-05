@@ -1,13 +1,38 @@
-var Financiamento = (function() {
+function getMoney( str )
+{
+        return parseInt( str.replace(/[\D]+/g,'') );
+}
 
+function formatReal( int )
+{
+        var tmp = int+'';
+        tmp = tmp.replace(/[\.]([0-9]{2})$/g, ",$1");
+        if( tmp.length > 6 )
+                tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+
+        return tmp;
+}
+function somenteNumeros(formato) {
+    var palavra = formato;
+    var somente_numeros = palavra.replace(/\D+/g, "");
+    return somente_numeros/100;
+}
+
+
+var Financiamento = (function() {
 
   function Financiamento(model) {
 
-    //taxa mensal quando se tem a anual
 
-    this.juros = (((Math.pow((1+(model.juros)),1/12)-1)*100)/100);
-    this.valorFinanciado = model.valorFinanciado;
+    if(model.valorFinanciado != 0){
+    var int = getMoney(model.valorFinanciado );
+    var formatoReal = formatReal( int ) ;
+    this.valorFinanciado = somenteNumeros(formatoReal);
     console.log("valor do financiado"+this.valorFinanciado);
+    }
+    //taxa mensal quando se tem a anual
+    this.juros = (((Math.pow((1+(model.juros)),1/12)-1)*100)/100);
+    console.log("Juros ---"+this.juros);
     this.periodoTotal = model.periodo;
     this.somaJuros = 0;
     this.somaPrestacoes = 0;
@@ -20,7 +45,7 @@ var Financiamento = (function() {
     var taxaJuros = [];
     var grid= [];
     var totalParcelas = [];
-      var amortizacao = (this.valorFinanciado / this.periodoTotal);
+    var amortizacao = (this.valorFinanciado / this.periodoTotal);
     if(this.periodoTotal == 0){
       saldoDevedor.push(this.valorFinanciado);
 
@@ -29,13 +54,15 @@ var Financiamento = (function() {
     console.log('Amortizacao'+amortizacao);
 
     for(var i=0; i <= this.periodoTotal; i++){
-    saldoDevedor.push(parseFloat(((this.periodoTotal-i) / this.periodoTotal) * this.valorFinanciado).toFixed(4));
+    saldoDevedor.push(parseFloat(((this.periodoTotal-i) / this.periodoTotal) * this.valorFinanciado).toFixed(2));
 
           if(i >0){
             taxaJuros.push(this.juros * saldoDevedor[i-1]);
             this.somaJuros = this.somaJuros + taxaJuros[i];
-            prestacao.push(taxaJuros[i] + amortizacao);
-            this.somaPrestacoes = this.somaPrestacoes +prestacao[i];
+            prestacao.push(parseFloat(taxaJuros[i] + amortizacao).toFixed(2));
+            this.somaPrestacoes = this.somaPrestacoes + (taxaJuros[i] + amortizacao);
+            console.log(" Total de prestações "+this.somaPrestacoes);
+            console.log("Prestação  " +prestacao[i])
 
           }else{
           taxaJuros.push(0);
@@ -45,8 +72,8 @@ var Financiamento = (function() {
                grid.push({
                periodo:i,
                taxa:parseFloat(taxaJuros[i]).toFixed(2),
-               prestacao:parseFloat(prestacao[i]).toFixed(2),
-               saldoDevedor:parseFloat(saldoDevedor[i]).toFixed(2),
+               prestacao:formatReal(prestacao[i]),
+               saldoDevedor:formatReal(saldoDevedor[i]),
                totalJuros:parseFloat(this.somaJuros).toFixed(2),
                totalParcelas:parseFloat(this.somaPrestacoes).toFixed(2)
 
@@ -79,13 +106,14 @@ var Financiamento = (function() {
         amortizacao.push((amortizaoNumerador[i]/amortizacaoDenominador[i]) * (this.valorFinanciado * this.juros));
         saldoDevedorNumerador.push(1-(Math.pow((1+this.juros),(this.periodoTotal-i)*(-1))));
         saldoDevedorDenominador.push(1-(Math.pow((1+this.juros),(this.periodoTotal)*(-1))));
-        saldoDevedor.push((saldoDevedorNumerador[i]/saldoDevedorDenominador[i]) * this.valorFinanciado);
+        saldoDevedor.push(parseFloat((saldoDevedorNumerador[i]/saldoDevedorDenominador[i]) * this.valorFinanciado).toFixed(2));
+        console.log("saldoDevedor "+ saldoDevedor[i]);
 
         if(i >0){
         taxaJuros.push(this.juros * saldoDevedor[i-1]);
         this.somaJuros = this.somaJuros + taxaJuros[i];
-        prestacao.push(taxaJuros[i]+amortizacao[i]);
-        this.somaPrestacoes = this.somaPrestacoes +prestacao[i];
+        prestacao.push(parseFloat(taxaJuros[i] + amortizacao[i]).toFixed(2));
+        this.somaPrestacoes = this.somaPrestacoes +(taxaJuros[i] + amortizacao[i]);
 
 
         }else{
@@ -96,8 +124,8 @@ var Financiamento = (function() {
                 grid.push({
                  periodo:i,
                  taxa:parseFloat(taxaJuros[i]).toFixed(2),
-                 prestacao:parseFloat(prestacao[i]).toFixed(2),
-                 saldoDevedor:parseFloat(saldoDevedor[i]).toFixed(2),
+                 prestacao:formatReal(prestacao[i]),
+                 saldoDevedor:formatReal(saldoDevedor[i]),
                  totalJuros:parseFloat(this.somaJuros).toFixed(2),
                  totalParcelas:parseFloat(this.somaPrestacoes).toFixed(2)
         })
