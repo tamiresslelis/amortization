@@ -16,8 +16,9 @@ angular.module('starter.controllers', [])
   };
   $scope.mascara = function() {
     $('#currency').maskMoney();
-    //formato();
+
   };
+
   $scope.alertCampos = function() {
     $ionicPopup.alert({
       title: 'ATENÇÃO',
@@ -35,26 +36,14 @@ angular.module('starter.controllers', [])
     });
   }
 
-  $scope.alertTabela = function(){
-    $ionicPopup.alert({
-      title: 'Tabela gerada',
-      content: 'Deslize para baixo e veja!'
-    }).then(function (res) {
-      console.log('Test Alert Box');
-    });
-  }
-
-
 $scope.submit= function() {
 var verificatab1 =0;
 var verificatab2 =0;
+
 var financiamento = new Financiamento($scope.model);
-console.log("aqui1");
-console.log("Valor Financiamento: " +$scope.model.valorFinanciado);
-console.log("Periodo: " +$scope.model.periodo);
+
             if(($scope.model.valorFinanciado == "") || ( $scope.model.periodo == undefined) ){
-              console.log("aqui 1 2 3");
-                $scope.alertCampos();
+                      $scope.alertCampos();
             }else{
                     if($scope.model.tabela == "none"){
                         $scope.alertCampos();
@@ -81,7 +70,6 @@ console.log("Periodo: " +$scope.model.periodo);
                         }
               }
       }
-
 })
 
 .controller('AccountCtrl', function($scope) {
