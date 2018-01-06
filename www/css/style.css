@@ -17,3 +17,8 @@ margin*{
   margin-top:  4px;
   font-size: 12px;
 }
+.btn-success1 {
+  color: #fff;
+  background-color: #33cd5f;
+  border-color:  #33cd5f;
+}

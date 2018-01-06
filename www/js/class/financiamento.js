@@ -17,7 +17,14 @@ function somenteNumeros(formato) {
     var somente_numeros = palavra.replace(/\D+/g, "");
     return somente_numeros/100;
 }
-
+function somenteNumerosMeses(num) {
+     var er = /[^0-9.]/;
+     er.lastIndex = 0;
+     var campo = num;
+     if (er.test(campo.value)) {
+       campo.value = "";
+     }
+ }
 
 var Financiamento = (function() {
 

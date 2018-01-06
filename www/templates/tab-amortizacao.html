@@ -1,0 +1,140 @@
+<ion-view view-title="Amortização">
+
+  <ion-content class="padding">
+    <form ng-submit="submit_div()" name="myForm" novalidate>
+      <div class="form-group ">
+        <label  class="col-form-label required" ng-class="{ 'has-error' : myForm.saldoDevedor.$invalid && (myForm.$submitted || myForm.saldoDevedor.$touched)}" ><strong>Meu saldo devedor é:</strong></label>
+        <input type="digit" id="currency" class="form-control" name="saldoDevedor" placeholder="R$0.000,00"  ng-model="mod.saldoDevedor" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal=","  ng-click="mascara()"  required>
+        <span style="color:red" class="has-error-msg" ng-show="myForm.saldoDevedor.$error.required && (myForm.$submitted || myForm.saldoDevedor.$touched)">Por favor, informe o saldo devedor.</span>
+      </div>
+      <div class="form-group">
+          <label class="col-form-label required" ng-class="{ 'has-error' : myForm.amortizacaoExtra.$invalid && (myForm.$submitted || myForm.amortizacaoExtra.$touched)}"><strong>Realizar uma amortização extra no valor de:</strong></label>
+          <input type="digit" id="currency1" class="form-control" name="amortizacaoExtra" placeholder="R$0.000,00"  ng-model="mod.AmortizacaoExtra" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal=","  ng-click="mascara1()"  required>
+          <span style="color:red" class="has-error-msg" ng-show="myForm.amortizacaoExtra.$error.required && (myForm.$submitted || myForm.amortizacaoExtra.$touched)">Por favor, informe o valor da amortização extra.</span>
+      </div>
+        <div class="form-group ">
+        <label class="col-form-label required" ng-class="{ 'has-error' : myForm.juros.$invalid && (myForm.$submitted || myForm.juros.$touched)}"><strong>Minha taxa de juros anual é:</strong></label>
+          <input type="digit" class="form-control" name="juros" placeholder="0.0000%" ng-model="mod.juros" ui-percentage-mask="4" required>
+          <span style="color:red" class="has-error-msg" ng-show="myForm.juros.$error.required && (myForm.$submitted || myForm.juros.$touched)">Por favor, informe a taxa de juros.</span>
+      </div>
+
+      <div class="form-group">
+          <label  class="col-form-label required" ng-class="{ 'has-error' : myForm.faltam.$invalid && (myForm.$submitted || myForm.faltam.$touched)}"><strong>Quantos meses tenho para pagar o meu saldo devedor:</strong></label>
+          <input type="number" class="form-control" onkeyup="somenteNumerosMeses(this);" name="faltam" placeholder="numérico"  ng-model="mod.faltam" required>
+          <span style="color:red" class="has-error-msg" ng-show="myForm.faltam.$error.required && (myForm.$submitted || myForm.faltam.$touched)">Por favor, informe a quantidade de meses.</span>
+      </div>
+      <div class="form-group">
+            <label  class="col-form-label required" ng-class="{ 'has-error' : myForm.opcao.$invalid && (myForm.$submitted || myForm.opcao.$touched)}"><strong>Selecione uma opção:</strong></label>
+            <ion-radio ng-model="prazoPrestacao"  value="1" ng-value="1" ng-click="switchRadio(1)">Diminuir o prazo</ion-radio>
+            <ion-radio ng-model="prazoPrestacao"  value="2" ng-value="2" ng-click="switchRadio(2)">Diminuir valor da prestação</ion-radio>
+    </div>
+    <div class="form-group">
+      <label class="col-form-label required"ng-class="{ 'has-error' : myForm.tabela.$invalid && (myForm.$submitted || myForm.tabela.$touched)}"  name="tabela"><strong>Qual a tabela do meu financiamento?</strong></label>
+      <select ng-init="mod.tabela = mod.tabela || 'none'" ng-model="mod.tabela" class="form-control" required>
+          <option value="none">Selecione</option>
+          <option value="price">PRICE</option>
+          <option value="sac">SAC</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-success1 btn-lg btn-block">Calcular</button>
+    </form>
+    <table ng-if="mod.inactive1 == true && mod.faltam <=1">
+      <tr ng-repeat="g in grid" ng-if="$last">
+        <td>Observação:Só é possível diminuir prazo  se faltar 3 ou mais de 3 parcelas.</td>
+      </tr>
+    </table>
+    <table ng-if="mod.inactive2 == true && mod.faltam <=1">
+      <tr ng-repeat="g in grid" ng-if="$last">
+        <td>Observação:Só é possível diminuir prazo  se faltar 3 ou mais de 3 parcelas.</td>
+      </tr>
+    </table>
+    <!-- Essa tabela somente para aparecer se opção 2 for a price-->
+    <table ng-if="mod.inactive2 == true && mod.juros == 0">
+      <tr ng-repeat="g in grid" ng-if="$last">
+        <td>Observação:Só é possível efetuar os calculos com taxa de juros diferente de 0 para a Tabela PRICE.</td>
+      </tr>
+    </table>
+    <!-- Essa tabela somente para aparecer se opcao 1 for a price (aqui)-->
+    <table ng-if="mod.inactive1 == true && mod.juros == 0">
+      <tr ng-repeat="g in grid" ng-if="$last">
+        <td>Observação:Só é possível efetuar os calculos com taxa de juros diferente de 0 para a Tabela PRICE.</td>
+      </tr>
+    </table>
+
+<!-- Tabela SAC-->
+    <table ng-if="mod.inactive1 == true  && mod.faltam >=2">
+      <thead ng-show="grid.length">
+        <tr ng-repeat="g in grid" ng-if="$last">
+          <td>Hoje, o valor da prestação a pagar é: R$ {{g.totalHoje}} </td>
+        </tr>
+        <tr ng-repeat="g in grid" ng-if="$last">
+          <td>Observação:Que é a soma da prestação de valor igual a R$ {{g.hoje}} , mais, o valor da amortização extra igual a R$ {{mod.AmortizacaoExtra}} </td>
+        </tr>
+      </thead>
+  </table>
+
+  <table>
+    <thead ng-show="grid.length" ng-if="mod.inactive1 == true && mod.faltam >=2">
+      <tr>
+        <td>Valor total de juros</td>
+        <td>Valor total de prestações</td>
+      </tr>
+      <tr ng-repeat="g in grid" ng-if="$last">
+      <td> R$ {{g.totalJuros}}</td>
+      <td> R$ {{g.totalParcelas}}</td>
+    </tr>
+  </table>
+
+
+    <table>
+      <thead ng-show="grid.length" ng-if="mod.inactive1 == true && mod.faltam >=2">
+        <tr>
+          <td>Período</td>
+          <td>Taxa de juros</td>
+          <td>Prestação</td>
+          <td>Saldo devedor</td>
+        </tr>
+      </thead>
+      <tr ng-repeat="g in grid" ng-if="mod.inactive1 == true && mod.faltam >=2">
+      <td> {{g.periodo}} </td>
+      <td> R$ {{g.taxa}}</td>
+      <td> R$ {{g.prestacao}} </td>
+      <td> R$ {{g.saldoDevedor}}</td>
+    </tr>
+  </table>
+    <!-- Essa tabela somente para aparecer se opção 1 for a price -->
+
+
+
+
+    <table>
+      <thead ng-show="grid.length" ng-if="mod.inactive2 == true && mod.faltam>=1">
+        <tr>
+          <td>Total de juros</td>
+          <td> Total de prestações</td>
+        </tr>
+        <tr ng-repeat="g in grid" ng-if="$last">
+        <td> R$ {{g.totalJuros}}</td>
+        <td> R$ {{g.totalParcelas}}</td>
+      </tr>
+    </table>
+    <!-- Mexendo aqui-->
+<table>
+    <thead ng-show="grid.length" ng-if="mod.inactive2 == true && mod.faltam>=1">
+      <tr>
+        <td>Período</td>
+        <td>Taxa de juros</td>
+        <td>Prestação</td>
+        <td>Saldo devedor</td>
+      </tr>
+    </thead>
+    <tr ng-repeat="g in grid" ng-if="mod.inactive2 == true && mod.faltam>=1">
+    <td> {{g.periodo}} </td>
+    <td> R$ {{g.taxa}}</td>
+    <td> R$ {{g.prestacao}} </td>
+    <td> R$ {{g.saldoDevedor}}</td>
+  </tr>
+</table>
+
+  </ion-content>
+</ion-view>

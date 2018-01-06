@@ -60,6 +60,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','u
       }
     })
 
+    .state('tab.amortizacao', {
+        url: '/amortizacao',
+        views: {
+          'tab-amortizacao': {
+            templateUrl: 'templates/tab-amortizacao.html',
+            controller: 'AmortizacaoCtrl'
+          }
+        }
+      })
+
 
   .state('tab.account', {
     url: '/account',

@@ -1,20 +1,49 @@
+function getMoney( str )
+{
+        return parseInt( str.replace(/[\D]+/g,'') );
+}
+
+function formatReal( int )
+{
+        var tmp = int+'';
+        tmp = tmp.replace(/[\.]([0-9]{2})$/g, ",$1");
+        if( tmp.length > 6 )
+                tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+
+        return tmp;
+}
+function somenteNumeros(formato) {
+    var palavra = formato;
+    var somente_numeros = palavra.replace(/\D+/g, "");
+    return somente_numeros/100;
+}
+function somenteNumerosMeses(num) {
+     var er = /[^0-9.]/;
+     er.lastIndex = 0;
+     var campo = num;
+     if (er.test(campo.value)) {
+       campo.value = "";
+     }
+ }
+
+
 var Divida = (function(){
 
-  //calculando a taxa mensal
-/*  function mensal() {
-        return Math.log(a) / Math.log(b);
-  }
-  var resultado = getBaseLog(base,y);
-*/
   function Divida(mod) {
+    if(mod.saldoDevedor != 0){
+          var int = getMoney(mod.saldoDevedor );
+          var formatoReal = formatReal( int ) ;
+          this.saldoDevedor = somenteNumeros(formatoReal);
+    }
+    var int1 = getMoney(mod.AmortizacaoExtra );
+    var formatoReal1 = formatReal( int1 ) ;
+    this.AmortizacaoExtra = somenteNumeros(formatoReal1);
+    console.log("----: "  +this.AmortizacaoExtra);
 
-
-    this.saldoDevedor = mod.saldoDevedor;
-    this.AmortizacaoExtra = mod.AmortizacaoExtra;
-    this.periodoTotal = 420;
+    this.periodoTotal = mod.faltam;
     this.diminuirParcela = mod.diminuirParcela;
-    //calculando a taxa mensal
-    //taxa mensel  quando se tem a anual
+
+    //taxa mensAl  quando se tem a anual
     console.log("Mod:"+mod.juros);
     this.juros = (((Math.pow((1+(mod.juros)),1/12)-1)*100)/100);
     console.log("juros mensal"+this.juros);
@@ -53,20 +82,24 @@ var Divida = (function(){
           saldoDevedorAtualizado1.push(this.saldoDevedor);
           saldoDevedorAtualizado2.push(this.saldoDevedor);
         }
+        console.log("00000000000 "+this.saldoDevedor);
+        console.log("O periodo aqui"+ this.periodoTotal);
         var amortizacao1 = ((this.saldoDevedor) / this.periodoTotal);
-        console.log("Valor da amortizacao aqui no for"+amortizacao1);
+        console.log("Valor da amortizacao aqui no for------"+amortizacao1);
         for(var i=0; i <= this.periodoTotal; i++){
               saldoDevedorAtualizado1.push(parseFloat(((this.periodoTotal-i) / this.periodoTotal) * this.saldoDevedor).toFixed(4));
-              console.log('Saldo devedor no periodo' +saldoDevedorAtualizado1[i]);
+              //console.log('Saldo devedor no periodo' +saldoDevedorAtualizado1[i]);
               if(i >0){
               taxaJuros1.push((this.juros * saldoDevedorAtualizado1[i-1]));
-              console.log("total de juros " + this.somaJuros);
+              //console.log("total de juros " + this.somaJuros);
               console.log('Juros é igual a ' +taxaJuros1[i]);
 
               prestacao1.push(taxaJuros1[i] + amortizacao1);
+              console.log("PRESTACAO 1: "+prestacao1[i]);
               //pegar somente a prestacao1 na posição 1
               if(i == 1){
                 var saldoDevedor_MAmortizacao_MPrestacao = this.saldoDevedor-amortizacao1-this.AmortizacaoExtra;
+                console.log("VAOR :"+this.saldoDevedor-amortizacao1-this.AmortizacaoExtra);
                 console.log('Saldo devedor - amortizacao extra - prestacao :'+saldoDevedor_MAmortizacao_MPrestacao);
                 console.log('prestacao'+prestacao1[1])
                 var emcima = ((1 -this.juros*i)+(this.juros));
@@ -94,7 +127,7 @@ var Divida = (function(){
           var amortizacao2 = this.saldoDevedor/j;
           console.log('Saldo devedor - amortizacao extra - prestacao MOSTRA O THIS.SALDODEVEDOR :'+this.saldoDevedor);
           for(var x=0; x <=j; x++){
-                                  saldoDevedorAtualizado2.push(((j-x)/j)* this.saldoDevedor);
+                                  saldoDevedorAtualizado2.push(parseFloat(((j-x)/j)* this.saldoDevedor).toFixed(2));
                                   console.log('Saldo devedor no periodo' +saldoDevedorAtualizado2[x]);
                                   if(x >0){
                                   taxaJuros2.push((this.juros * saldoDevedorAtualizado2[x-1]));
@@ -102,8 +135,8 @@ var Divida = (function(){
                                   console.log("total de juros " + this.somaJuros);
                                   console.log('Juros é igual a ' +taxaJuros2[x]);
                                   console.log("Valor da amortizacao aqui no for"+amortizacao2);
-                                  prestacao2.push(taxaJuros2[x] + amortizacao2);
-                                  this.somaPrestacoes = this.somaPrestacoes +prestacao2[x];
+                                  prestacao2.push(parseFloat(taxaJuros2[x] + amortizacao2).toFixed(2));
+                                  this.somaPrestacoes = this.somaPrestacoes +(taxaJuros2[x] + amortizacao2);
                                   console.log('Prestacao no periodo é igual a ' +prestacao2[x]);
                                   console.log("total de prestacoes " + this.somaPrestacoes);
           }else{
@@ -115,8 +148,8 @@ var Divida = (function(){
                      totalHoje:parseFloat(prestacao1[1]+this.AmortizacaoExtra).toFixed(2),
                      periodo:x,
                      taxa:parseFloat(taxaJuros2[x]).toFixed(2),
-                     prestacao:parseFloat(prestacao2[x]).toFixed(2),
-                     saldoDevedor:parseFloat(saldoDevedorAtualizado2[x]).toFixed(2),
+                     prestacao:formatReal(prestacao2[x]),
+                     saldoDevedor:formatReal(saldoDevedorAtualizado2[x]),
                      totalJuros:parseFloat(this.somaJuros).toFixed(2),
                      totalParcelas:parseFloat(this.somaPrestacoes).toFixed(2),
                   })

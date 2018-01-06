@@ -1,25 +1,25 @@
-<ion-view view-title="Financiamento">
 
+<ion-view view-title="Financiamento">
 <ion-content class="padding">
 
 <form ng-submit="submit()" name="myForm" novalidate>
   <div class="form-group " >
-    <label  class="col-form-label required" ng-class="{ 'has-error' : myForm.valorFinanciado.$invalid && (myForm.$submitted || myForm.valorFinanciado.$touched)}" ><strong>Valor financiado</strong></label>
+    <label  class="col-form-label required" ng-class="{ 'has-error' : myForm.valorFinanciado.$invalid && (myForm.$submitted || myForm.valorFinanciado.$touched)}" ><strong>Meu valor financiado é:</strong></label>
       <input type="digit" id="currency" class="form-control" name="valorFinanciado" placeholder="R$0.000,00"  ng-model="model.valorFinanciado" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal=","  ng-click="mascara()"  required>
     <span style="color:red" class="has-error-msg" ng-show="myForm.valorFinanciado.$error.required && (myForm.$submitted || myForm.valorFinanciado.$touched)">Por favor, informe o valor financiado.</span>
   </div>
   <div class="form-group">
-    <label class="col-form-label required" ng-class="{ 'has-error' : myForm.juros.$invalid && (myForm.$submitted || myForm.juros.$touched)}"><strong>Taxa de juros anual</strong></label>
+    <label class="col-form-label required" ng-class="{ 'has-error' : myForm.juros.$invalid && (myForm.$submitted || myForm.juros.$touched)}"><strong>Minha taxa de juros anual é:</strong></label>
       <input type="digit" class="form-control" name="juros" placeholder="0.0000%" ng-model="model.juros" ui-percentage-mask="4" required>
       <span style="color:red" class="has-error-msg" ng-show="myForm.juros.$error.required && (myForm.$submitted || myForm.juros.$touched)">Por favor, informe a taxa de juros.</span>
   </div>
   <div class="form-group">
-    <label  class="col-form-label required" ng-class="{ 'has-error' : myForm.periodo.$invalid && (myForm.$submitted || myForm.periodo.$touched)}"><strong>Quantos de meses</strong></label>
-        <input type="number" class="form-control" name="periodo" placeholder="numérico"  ng-model="model.periodo" required>
+    <label  class="col-form-label required" ng-class="{ 'has-error' : myForm.periodo.$invalid && (myForm.$submitted || myForm.periodo.$touched)}"><strong>Em quantos meses desejo financiar:</strong></label>
+        <input type="number" class="form-control" onkeyup="somenteNumerosMeses(this);" name="periodo" placeholder="numérico"  ng-model="model.periodo" required>
         <span style="color:red" class="has-error-msg" ng-show="myForm.periodo.$error.required && (myForm.$submitted || myForm.periodo.$touched)">Por favor, informe a quantidade de meses.</span>
   </div>
   <div class="form-group">
-    <label class="col-form-label input-label required"ng-class="{ 'has-error' : myForm.tabela.$invalid && (myForm.$submitted || myForm.tabela.$touched)}"  name="tabela"><strong>Tabela</strong></label>
+    <label class="col-form-label required"ng-class="{ 'has-error' : myForm.tabela.$invalid && (myForm.$submitted || myForm.tabela.$touched)}"  name="tabela"><strong>Qual a tabela do meu financiamento?</strong></label>
     <select ng-init="model.tabela = model.tabela || 'none'" ng-model="model.tabela" class="form-control" required>
         <option value="none">Selecione</option>
         <option value="price">PRICE</option>
@@ -27,7 +27,7 @@
       </select>
     </div>
 
-  <button type="submit" class="btn btn-success btn-lg btn-block">Gerar</button>
+  <button type="submit" class="btn btn-success1 btn-lg btn-block">Calcular</button>
 </form>
 
 
