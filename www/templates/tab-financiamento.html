@@ -5,7 +5,7 @@
 <form ng-submit="submit()" name="myForm" novalidate>
   <div class="form-group " >
     <label  class="col-form-label required" ng-class="{ 'has-error' : myForm.valorFinanciado.$invalid && (myForm.$submitted || myForm.valorFinanciado.$touched)}" ><strong>Meu valor financiado é:</strong></label>
-      <input type="digit" id="currency" class="form-control" name="valorFinanciado" placeholder="R$0.000,00"  ng-model="model.valorFinanciado" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal=","  ng-click="mascara()"  required>
+      <input type="digit" id="currency_finan" class="form-control" name="valorFinanciado" placeholder="R$0,00"  ng-model="model.valorFinanciado" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal=","  ng-click="mascaraFian()"  required>
     <span style="color:red" class="has-error-msg" ng-show="myForm.valorFinanciado.$error.required && (myForm.$submitted || myForm.valorFinanciado.$touched)">Por favor, informe o valor financiado.</span>
   </div>
   <div class="form-group">

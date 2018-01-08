@@ -3910,8 +3910,8 @@ a.subdued {
     .bar.bar-light.bar-footer {
       background-image: linear-gradient(180deg, #ddd, #ddd 50%, transparent 50%); }
   .bar.bar-stable {
-    border-color: #b2b2b2;
-    background-color: #886aea;
+    border-color: #0e76cc;
+    background-color: #0e76cc;
     background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
     color: #444; }
     .bar.bar-stable .title {
@@ -4445,14 +4445,14 @@ a.subdued {
 
 .tabs-royal > .tabs,
 .tabs.tabs-royal {
-  border-color: #6b46e5;
-  background-color: #886aea;
-  background-image: linear-gradient(0deg, #6b46e5, #6b46e5 50%, transparent 50%);
+  border-color: #0e76cc;
+  background-color: #0e76cc;
+  background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
   color: #fff; }
   .tabs-royal > .tabs .tab-item .badge,
   .tabs.tabs-royal .tab-item .badge {
     background-color: #fff;
-    color: #886aea; }
+    color: #0e76cc; }
 
 .tabs-dark > .tabs,
 .tabs.tabs-dark {
@@ -4608,7 +4608,7 @@ a.subdued {
   top: 4%; }
 
 .tabs-striped.tabs-royal .tabs {
-  background-color: #886aea; }
+  background-color: #0e76cc; }
 
 .tabs-striped.tabs-royal .tab-item {
   color: rgba(255, 255, 255, 0.4);
@@ -4672,7 +4672,7 @@ a.subdued {
   background-image: none; }
 
 .tabs-striped.tabs-background-royal .tabs {
-  background-color: #886aea;
+  background-color: #0e76cc;
   background-image: none; }
 
 .tabs-striped.tabs-background-dark .tabs {
@@ -4849,9 +4849,9 @@ a.subdued {
 
 .tabs-background-royal .tabs,
 .tabs-background-royal > .tabs {
-  background-color: #886aea;
-  background-image: linear-gradient(0deg, #6b46e5, #6b46e5 50%, transparent 50%);
-  border-color: #6b46e5; }
+  background-color: #0e76cc;
+  background-image: linear-gradient(0deg, #b2b2b2, #b2b2b2 50%, transparent 50%);
+  border-color: #0e76cc; }
 
 .tabs-background-dark .tabs,
 .tabs-background-dark > .tabs {
@@ -8281,9 +8281,18 @@ input:checked + .checkbox-icon:after {
   /* hide any radio button inputs elements (the ugly circles) */
   position: absolute;
   left: -9999px; }
+  .item-radio input:hover + .radio-content .item-content{
+    /* hide any radio button inputs elements (the ugly circles) */
+
+    background-color: #accbff;
+  }
   .item-radio input:checked + .radio-content .item-content {
     /* style the item content when its checked */
-    background: #f7f7f7; }
+    background: #0e76cc;
+    color:white;
+  }
+
+
   .item-radio input:checked + .radio-content .radio-icon {
     /* show the checkmark icon when its checked */
     visibility: visible; }

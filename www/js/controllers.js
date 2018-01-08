@@ -14,8 +14,8 @@ angular.module('starter.controllers', [])
     somaPrestacoes: 0
 
   };
-  $scope.mascara = function() {
-    $('#currency').maskMoney();
+  $scope.mascaraFian = function() {
+    $('#currency_finan').maskMoney();
 
   };
   $scope.alertPeriodo = function() {
@@ -91,15 +91,6 @@ var financiamento = new Financiamento($scope.model);
 })
 
 .controller('AmortizacaoCtrl', function($scope,$ionicPopup){
-
-  $scope.mascara = function() {
-    $('#currency').maskMoney();
-
-  };
-  $scope.mascara1 = function() {
-    $('#currency1').maskMoney();
-
-  };
   $scope.mod = {
     saldoDevedor: '',
     juros: '',
@@ -114,6 +105,54 @@ var financiamento = new Financiamento($scope.model);
     somaPrestacoes: 0
 
   };
+  $scope.mascaraAmort = function() {
+    $('#currency').maskMoney();
+
+  };
+  $scope.mascara1 = function() {
+    $('#currency1').maskMoney();
+
+  };
+  $scope.alertCampos = function() {
+    $ionicPopup.alert({
+      title: 'Ops!',
+      content: 'Por favor, preencha todos os campos!'
+    }).then(function (res) {
+      console.log('Test Alert Box');
+    });
+  }
+  $scope.alertPeriodo = function() {
+    $ionicPopup.alert({
+      title: 'Ops!',
+      content: 'Informamos que a quantidade máxima para realizar um financiamento é até 450 meses.'
+    }).then(function (res) {
+      console.log('Test Alert Box');
+    });
+  }
+  $scope.alertPeriodoPrazo = function() {
+    $ionicPopup.alert({
+      title: 'Ops!',
+      content: 'Informamos que só é possível diminuir o prazo se faltar 3 ou mais de 3 meses.'
+    }).then(function (res) {
+      console.log('Test Alert Box');
+    });
+  }
+  $scope.alertTabela = function(){
+    $ionicPopup.alert({
+      title: 'Tabela gerada',
+      content: 'Deslize  para baixo e veja!'
+    }).then(function (res) {
+      console.log('Test Alert Box');
+    });
+  }
+  $scope.alertTabelaPrice = function(){
+    $ionicPopup.alert({
+      title: 'ATENÇÃO',
+      content: 'Só é possível efetuar os calculos com taxa de juros diferente de 0 para a Tabela PRICE!'
+    }).then(function (res) {
+      console.log('Test Alert Box');
+    });
+}
 
   $scope.switchRadio = (valor) => {
     if (valor === 1) {
@@ -126,71 +165,73 @@ var financiamento = new Financiamento($scope.model);
     }
   }
 
-  // };
+
 
   $scope.submit_div = function () {
+    var verificatab1 = false;
+    var verificatab2 = false;
 
     var divida = new Divida($scope.mod);
-    //console.log("inactive1"+$scope.mod.inactive1);
-    //console.log("inactive2"+$scope.mod.inactive2);
-    //se alguma opcao diminuir estiver verdadeira
-    if ($scope.mod.inactive1 == true || $scope.mod.inactive2 == true) {
-      //verifica se preencheu a tabela
-      //console.log("aqui0");
-      if ($scope.mod.tabela == "none") {
+    console.log("O peridodo"+$scope.mod.faltam);
+    if(($scope.mod.saldoDevedor == "") || ( $scope.mod.faltam == undefined) ){
+              $scope.alertCampos();
+    }else{
+              //se alguma opcao diminuir estiver verdadeira
+              if ($scope.mod.inactive1 == true || $scope.mod.inactive2 == true) {
+                //verifica se preencheu a tabela
+                //console.log("aqui0");
+                      if ($scope.mod.tabela == "none") {
+                            $scope.alertCampos();
+                      }
+                      if ($scope.mod.tabela == "sac") {
+                            if($scope.mod.faltam >450){
+                                $scope.alertPeriodo();
+                            }else{
+                              if( $scope.mod.faltam <3){
 
-        $ionicPopup.alert({
-          title: 'ATENÇÃO',
-          content: 'Preencha os campos obrigatórios!'
-        }).then(function (res) {
-          console.log('Test Alert Box');
-        });
-      }
+                                $scope.alertPeriodoPrazo();
+                              }else{
+                              verificatab1 = true;
+                              $scope.grid = divida.sac();
+                              }
+                            }
+                      }
+                      if ($scope.mod.tabela == "price") {
+                        if($scope.mod.faltam >450){
+                            $scope.alertPeriodo();
+                        }else{
+                              if( $scope.mod.faltam <3){
+                                $scope.alertPeriodoPrazo();
+                              }else{
+                                   if($scope.mod.juros == 0){
+                                        $scope.alertTabelaPrice();
+                                   }else{
+                                      verificatab2 = true;
+                                          $scope.grid = divida.price();
+                                    }
+                                  }
+                              }
+                      }
+                      if (verificatab1 || verificatab2 ==  true) {
+                            $scope.alertTabela();
+                        }
 
-      if ($scope.mod.tabela == "sac") {
-        var tab1 = 1;
-        $scope.grid = divida.sac();
 
-      }
-      if ($scope.mod.tabela == "price") {
-        var tab2 = 1;
-        $scope.grid = divida.price();
-      }
-      if (tab1 || tab2 == 1) {
-        $ionicPopup.alert({
-          title: 'Tabela gerada',
-          content: 'Deslize para baixo e veja!'
-        }).then(function (res) {
-          console.log('Test Alert Box');
-        });
+              }
+              else {
+                // se nenhuma das opçãos e a tabela estiver none
+                if ($scope.mod.tabela == "none") {
+                  // console.log("aqui1");
+                  $scope.alertCampos();
+                  //se a tabela estiver diferente de none,mas nenhuma opcao foi selecionada
+                } else {
+                  $scope.alertCampos();
+                }
 
+              }
 
-      };
-    }
-    else {
-      // se nenhuma das opçãos e a tabela estiver none
-      if ($scope.mod.tabela == "none") {
-        // console.log("aqui1");
-        $ionicPopup.alert({
-          title: 'ATENÇÃO',
-          content: 'Preencha os campos obrigatórios!'
-        }).then(function (res) {
-          console.log('Test Alert Box');
-        });
-        //se a tabela estiver diferente de none,mas nenhuma opcao foi selecionada
-      } else {
-        console.log("aqui2");
-        $ionicPopup.alert({
-          title: 'ATENÇÃO',
-          content: 'Preencha os campos obrigatórios!'
-        }).then(function (res) {
-          console.log('Test Alert Box');
-        });
-      }
-
-    }
-
-  }
+            }
+        }
 
 })
 .controller('AccountCtrl', function($scope) {

@@ -1,8 +1,7 @@
 /* Empty. Add your own CSS if you like */
-margin*{
-  padding: 0;
-  margin: 0;
-}
+
+*{margin: 0;
+padding: 0;}
 
 .table-responsive-sm{
   margin-top: 15px;
@@ -21,4 +20,30 @@ margin*{
   color: #fff;
   background-color: #33cd5f;
   border-color:  #33cd5f;
+}
+.content-inicio h2,h6{
+   text-align: center;
+   padding-top: 2px;
+}
+#menu{
+    align-items: center;
+    padding-top: 4px;
+    margin: 0px;
+    padding: 0px;
+}
+#cards{
+  height: 440px;
+  width: 392px;
+}
+.row1{
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.card_menu1{
+  height: 100%;
+  width: 70%;
+}
+.card_menu2{
+  height: 100%;
+  width: 30%;
 }
