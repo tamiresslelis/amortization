@@ -21,15 +21,32 @@ padding: 0;}
   background-color: #33cd5f;
   border-color:  #33cd5f;
 }
-.content-inicio h2,h6{
+.content-inicio{
+  background: rgba(255, 255, 255, 0.7);
+  width: 100%;
+  height: 100%;
+
+}
+.content-inicio h2{
    text-align: center;
    padding-top: 2px;
+   width: 100%;
+
+}
+.content-inicio h6{
+   text-align: center;
+   padding-top: 2px;
+   width: 100%;
+   height: 100%;
+
 }
 #menu{
     align-items: center;
     padding-top: 4px;
-    margin: 0px;
-    padding: 0px;
+    height: 600px;
+    width: 300px;
+    position: center;
+
 }
 #cards{
   height: 440px;
@@ -46,4 +63,11 @@ padding: 0;}
 .card_menu2{
   height: 100%;
   width: 30%;
+}
+.padding-inicio{
+
+  background-image: url("../img/money.jpg") ;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
 }

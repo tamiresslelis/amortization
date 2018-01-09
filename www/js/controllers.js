@@ -18,39 +18,15 @@ angular.module('starter.controllers', [])
     $('#currency_finan').maskMoney();
 
   };
-  $scope.alertPeriodo = function() {
+  $scope.alert = function(textTitle,textMensage) {
     $ionicPopup.alert({
-      title: 'Ops!',
-      content: 'Informamos que a quantidade máxima para realizar um financiamento é até 450 meses.'
+      title: textTitle,
+      content: textMensage,
     }).then(function (res) {
       console.log('Test Alert Box');
     });
   }
 
-  $scope.alertCampos = function() {
-    $ionicPopup.alert({
-      title: 'Ops!',
-      content: 'Por favor, preencha todos os campos!'
-    }).then(function (res) {
-      console.log('Test Alert Box');
-    });
-  }
-  $scope.alertTabela = function(){
-    $ionicPopup.alert({
-      title: 'Tabela gerada',
-      content: 'Deslize  para baixo e veja!'
-    }).then(function (res) {
-      console.log('Test Alert Box');
-    });
-  }
-  $scope.alertTabelaPrice = function(){
-    $ionicPopup.alert({
-      title: 'ATENÇÃO',
-      content: 'Só é possível efetuar os calculos com taxa de juros diferente de 0 para a Tabela PRICE!'
-    }).then(function (res) {
-      console.log('Test Alert Box');
-    });
-}
 $scope.submit= function() {
 var verificatab1 = false;
 var verificatab2 = false;
@@ -58,14 +34,14 @@ var verificatab2 = false;
 var financiamento = new Financiamento($scope.model);
 
             if(($scope.model.valorFinanciado == "") || ( $scope.model.periodo == undefined) ){
-                      $scope.alertCampos();
+                      $scope.alert('Ops!','Por favor, preencha todos os campos!');
             }else{
                     if($scope.model.tabela == "none"){
-                        $scope.alertCampos();
+                        $scope.alert('Ops!','Por favor, preencha todos os campos!');
                     }else{
                         if($scope.model.tabela == "sac") {
                             if($scope.model.periodo >450){
-                                $scope.alertPeriodo();
+                                $scope.alert('Ops!','Informamos que a quantidade máxima para realizar um financiamento é até 450 meses.');
                             }else{
                               verificatab1 = true;
                               $scope.grid = financiamento.sac();
@@ -73,10 +49,10 @@ var financiamento = new Financiamento($scope.model);
                         }
                         if ($scope.model.tabela == "price") {
                           if($scope.model.periodo >450){
-                              $scope.alertPeriodo();
+                              $scope.alert('Ops!','Informamos que a quantidade máxima para realizar um financiamento é até 450 meses.');
                           }else{
                                if($scope.model.juros == 0){
-                                    $scope.alertTabelaPrice();
+                                    $scope.alert('ATENÇÃO','Só é possível efetuar os calculos com taxa de juros diferente de 0 para a Tabela PRICE!');
                                }else{
                                   verificatab2 = true;
                                  $scope.grid = financiamento.price();
@@ -84,7 +60,8 @@ var financiamento = new Financiamento($scope.model);
                               }
                         }
                         if (verificatab1 || verificatab2 ==  true) {
-                          $scope.alertTabela();}
+                            $scope.alert('Tabela gerada!','Deslize  para baixo e veja!');
+                          }
                         }
               }
       }
@@ -113,46 +90,14 @@ var financiamento = new Financiamento($scope.model);
     $('#currency1').maskMoney();
 
   };
-  $scope.alertCampos = function() {
+  $scope.alert = function(textTitle,textMensage) {
     $ionicPopup.alert({
-      title: 'Ops!',
-      content: 'Por favor, preencha todos os campos!'
+      title: textTitle,
+      content: textMensage,
     }).then(function (res) {
       console.log('Test Alert Box');
     });
   }
-  $scope.alertPeriodo = function() {
-    $ionicPopup.alert({
-      title: 'Ops!',
-      content: 'Informamos que a quantidade máxima para realizar um financiamento é até 450 meses.'
-    }).then(function (res) {
-      console.log('Test Alert Box');
-    });
-  }
-  $scope.alertPeriodoPrazo = function() {
-    $ionicPopup.alert({
-      title: 'Ops!',
-      content: 'Informamos que só é possível diminuir o prazo se faltar 3 ou mais de 3 meses.'
-    }).then(function (res) {
-      console.log('Test Alert Box');
-    });
-  }
-  $scope.alertTabela = function(){
-    $ionicPopup.alert({
-      title: 'Tabela gerada',
-      content: 'Deslize  para baixo e veja!'
-    }).then(function (res) {
-      console.log('Test Alert Box');
-    });
-  }
-  $scope.alertTabelaPrice = function(){
-    $ionicPopup.alert({
-      title: 'ATENÇÃO',
-      content: 'Só é possível efetuar os calculos com taxa de juros diferente de 0 para a Tabela PRICE!'
-    }).then(function (res) {
-      console.log('Test Alert Box');
-    });
-}
 
   $scope.switchRadio = (valor) => {
     if (valor === 1) {
@@ -165,8 +110,6 @@ var financiamento = new Financiamento($scope.model);
     }
   }
 
-
-
   $scope.submit_div = function () {
     var verificatab1 = false;
     var verificatab2 = false;
@@ -174,22 +117,22 @@ var financiamento = new Financiamento($scope.model);
     var divida = new Divida($scope.mod);
     console.log("O peridodo"+$scope.mod.faltam);
     if(($scope.mod.saldoDevedor == "") || ( $scope.mod.faltam == undefined) ){
-              $scope.alertCampos();
+              $scope.alert('Ops!','Por favor, preencha todos os campos!');
     }else{
               //se alguma opcao diminuir estiver verdadeira
               if ($scope.mod.inactive1 == true || $scope.mod.inactive2 == true) {
                 //verifica se preencheu a tabela
-                //console.log("aqui0");
+        
                       if ($scope.mod.tabela == "none") {
-                            $scope.alertCampos();
+                            $scope.alert('Ops!','Por favor, preencha todos os campos!');
                       }
                       if ($scope.mod.tabela == "sac") {
                             if($scope.mod.faltam >450){
-                                $scope.alertPeriodo();
+                                $scope.alert('Ops!','Informamos que a quantidade máxima para realizar um financiamento é até 450 meses.');
                             }else{
                               if( $scope.mod.faltam <3){
 
-                                $scope.alertPeriodoPrazo();
+                                $scope.alert('Ops!','Informamos que só é possível diminuir o prazo se faltar 3 ou mais de 3 meses.');
                               }else{
                               verificatab1 = true;
                               $scope.grid = divida.sac();
@@ -198,13 +141,13 @@ var financiamento = new Financiamento($scope.model);
                       }
                       if ($scope.mod.tabela == "price") {
                         if($scope.mod.faltam >450){
-                            $scope.alertPeriodo();
+                            $scope.alert('Ops!','Informamos que a quantidade máxima para realizar um financiamento é até 450 meses.');
                         }else{
                               if( $scope.mod.faltam <3){
-                                $scope.alertPeriodoPrazo();
+                                $scope.alert('Ops!','Informamos que só é possível diminuir o prazo se faltar 3 ou mais de 3 meses.');
                               }else{
                                    if($scope.mod.juros == 0){
-                                        $scope.alertTabelaPrice();
+                                        $scope.alert('ATENÇÃO','Só é possível efetuar os calculos com taxa de juros diferente de 0 para a Tabela PRICE!');
                                    }else{
                                       verificatab2 = true;
                                           $scope.grid = divida.price();
@@ -213,7 +156,7 @@ var financiamento = new Financiamento($scope.model);
                               }
                       }
                       if (verificatab1 || verificatab2 ==  true) {
-                            $scope.alertTabela();
+                            $scope.alertTabela('Tabela gerada!','Deslize  para baixo e veja!');
                         }
 
 
@@ -222,10 +165,10 @@ var financiamento = new Financiamento($scope.model);
                 // se nenhuma das opçãos e a tabela estiver none
                 if ($scope.mod.tabela == "none") {
                   // console.log("aqui1");
-                  $scope.alertCampos();
+                  $scope.alert('Ops!','Por favor, preencha todos os campos!');
                   //se a tabela estiver diferente de none,mas nenhuma opcao foi selecionada
                 } else {
-                  $scope.alertCampos();
+                  $scope.alert('Ops!','Por favor, preencha todos os campos!');
                 }
 
               }
