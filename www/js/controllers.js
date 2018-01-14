@@ -122,7 +122,7 @@ var financiamento = new Financiamento($scope.model);
               //se alguma opcao diminuir estiver verdadeira
               if ($scope.mod.inactive1 == true || $scope.mod.inactive2 == true) {
                 //verifica se preencheu a tabela
-        
+
                       if ($scope.mod.tabela == "none") {
                             $scope.alert('Ops!','Por favor, preencha todos os campos!');
                       }
@@ -156,7 +156,7 @@ var financiamento = new Financiamento($scope.model);
                               }
                       }
                       if (verificatab1 || verificatab2 ==  true) {
-                            $scope.alertTabela('Tabela gerada!','Deslize  para baixo e veja!');
+                            $scope.alert('Tabela gerada!','Deslize  para baixo e veja!');
                         }
 
 
