@@ -9067,9 +9067,8 @@ a.button {
   display: -moz-flex;
   display: -ms-flexbox;
   display: flex;
-  /*padding: 5px;*/
-  width:100%;
-  }
+  padding: 5px;
+  width: 100%; }
 
 .row-wrap {
   -webkit-flex-wrap: wrap;

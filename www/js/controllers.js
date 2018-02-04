@@ -177,7 +177,7 @@ var financiamento = new Financiamento($scope.model);
         }
 
 })
-.controller('AccountCtrl', function($scope) {
+.controller('AjudaCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
   };
