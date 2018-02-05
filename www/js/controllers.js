@@ -1,6 +1,14 @@
 angular.module('starter.controllers', [])
 
-.controller('InicioCtrl', function($scope,){
+.controller('InicioCtrl', function($scope, $state){
+
+$scope.paraFinanciamento = function(){
+    $state.go('tab.finanamento');
+}
+$scope.paraAmortizacao = function(){
+    $state.go('tab.amortizacao');
+}
+
 
 })
 

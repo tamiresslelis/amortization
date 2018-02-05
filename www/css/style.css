@@ -31,6 +31,9 @@ padding: 0;}
 
 .content-inicio h2,h6{
    text-align: center;
+   padding: 25px;
+   margin: 0px;
+
 }
 #menu{
   width: 720px;
@@ -67,4 +70,7 @@ a{
 
 footer{
   text-align: center;
+}
+.padding p,h3{
+  color:gray;
 }
