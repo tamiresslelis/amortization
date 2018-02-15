@@ -42,14 +42,14 @@
 
 
 <!-- Tabela SAC-->
-<div class="table-responsive-sm">
+<div class="table-responsive-sm thead-dark">
     <table class="table table-bordered table-sm" ng-if="mod.inactive1 == true  && mod.faltam >=2">
       <thead ng-show="grid.length">
-        <tr ng-repeat="g in grid" ng-if="$last" class="thead-dark">
-          <td>Hoje, o valor da prestação a pagar é: R$ {{g.totalHoje}} </td>
+        <tr  ng-repeat="g in grid" ng-if="$last" >
+          <td >Hoje, o valor da prestação a pagar é: R$ {{g.totalHoje}} </td>
         </tr>
-        <tr ng-repeat="g in grid" ng-if="$last" class="thead-dark">
-          <td>Observação:Que é a soma da prestação de valor igual a R$ {{g.hoje}} , mais, o valor da amortização extra igual a R$ {{mod.AmortizacaoExtra}} </td>
+        <tr  ng-repeat="g in grid" ng-if="$last" >
+          <td>Observação: Que é a soma da prestação de valor igual a R$ {{g.hoje}} , mais, o valor da amortização extra igual a R$ {{mod.AmortizacaoExtra}} </td>
         </tr>
       </thead>
   </table>

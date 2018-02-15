@@ -7,6 +7,7 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','ui.utils.masks'])
 
+
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -45,7 +46,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','u
     views: {
       'tab-inicio': {
         templateUrl: 'templates/tab-inicio.html',
-        controller: 'InicioCtrl'
+        controller: 'inicioCtrl'
       }
     }
   })
@@ -55,7 +56,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','u
       views: {
         'tab-financiamento': {
           templateUrl: 'templates/tab-financiamento.html',
-          controller: 'FinanciamentoCtrl'
+          controller: 'financiamentoCtrl'
         }
       }
     })
@@ -65,21 +66,31 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services','u
         views: {
           'tab-amortizacao': {
             templateUrl: 'templates/tab-amortizacao.html',
-            controller: 'AmortizacaoCtrl'
+            controller: 'amortizacaoCtrl'
           }
         }
       })
 
+      .state('tab.tabelas', {
+          url: '/tabelas',
+          views: {
+            'tab-tabelas': {
+              templateUrl: 'templates/tab-tabelas.html',
+              controller: 'tabelasCtrl'
+            }
+          }
+        })
 
   .state('tab.ajuda', {
     url: '/ajuda',
     views: {
       'tab-ajuda': {
         templateUrl: 'templates/tab-ajuda.html',
-        controller: 'AjudaCtrl'
+        controller: 'ajudaCtrl'
       }
     }
   });
+
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/inicio');

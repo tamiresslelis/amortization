@@ -1,31 +1,3 @@
-function getMoney( str )
-{
-        return parseInt( str.replace(/[\D]+/g,'') );
-}
-
-function formatReal( int )
-{
-        var tmp = int+'';
-        tmp = tmp.replace(/[\.]([0-9]{2})$/g, ",$1");
-        if( tmp.length > 6 )
-                tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
-
-        return tmp;
-}
-function somenteNumeros(formato) {
-    var palavra = formato;
-    var somente_numeros = palavra.replace(/\D+/g, "");
-    return somente_numeros/100;
-}
-function somenteNumerosMeses(num) {
-     var er = /[^0-9.]/;
-     er.lastIndex = 0;
-     var campo = num;
-     if (er.test(campo.value)) {
-       campo.value = "";
-     }
- }
-
 
 var Divida = (function(){
 
@@ -539,3 +511,31 @@ var Divida = (function(){
 
   return Divida;
 })();
+
+function getMoney( str )
+{
+        return parseInt( str.replace(/[\D]+/g,'') );
+}
+
+function formatReal( int )
+{
+        var tmp = int+'';
+        tmp = tmp.replace(/[\.]([0-9]{2})$/g, ",$1");
+        if( tmp.length > 6 )
+                tmp = tmp.replace(/([0-9]{3}),([0-9]{2}$)/g, ".$1,$2");
+
+        return tmp;
+}
+function somenteNumeros(formato) {
+    var palavra = formato;
+    var somente_numeros = palavra.replace(/\D+/g, "");
+    return somente_numeros/100;
+}
+function somenteNumerosMeses(num) {
+     var er = /[^0-9.]/;
+     er.lastIndex = 0;
+     var campo = num;
+     if (er.test(campo.value)) {
+       campo.value = "";
+     }
+ }

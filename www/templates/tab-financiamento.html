@@ -5,7 +5,7 @@
 
 <ion-content class="padding">
 
-<form ng-submit="submit()" name="myForm" novalidate>
+<form ng-submit="submit()" name="myForm" id="myForm" novalidate>
   <div class="form-group " >
     <label  class="col-form-label required" ng-class="{ 'has-error' : myForm.valorFinanciado.$invalid && (myForm.$submitted || myForm.valorFinanciado.$touched)}" ><strong>Meu valor financiado é:</strong></label>
       <input type="digit" id="currency_finan" class="form-control" name="valorFinanciado" placeholder="R$0,00"  ng-model="model.valorFinanciado" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal=","  ng-click="mascaraFian()"  required>
@@ -31,6 +31,7 @@
     </div>
 
   <button type="submit" class="btn btn-success1 btn-lg btn-block">Calcular</button>
+  <button type="reset" class="btn btn-dark btn-lg btn-block" ng-click="reset()">Limpar</button>
 </form>
 
 

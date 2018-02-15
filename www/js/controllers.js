@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('InicioCtrl', function($scope, $state){
+.controller('inicioCtrl', function($scope, $state){
 
 $scope.paraFinanciamento = function(){
     $state.go('tab.finanamento');
@@ -9,10 +9,9 @@ $scope.paraAmortizacao = function(){
     $state.go('tab.amortizacao');
 }
 
-
 })
 
-.controller('FinanciamentoCtrl', function ($scope, $ionicPopup){
+.controller('financiamentoCtrl', function ($scope, $ionicPopup){
   $scope.model = {
     valorFinanciado: '',
     juros: '',
@@ -34,6 +33,12 @@ $scope.paraAmortizacao = function(){
       console.log('Test Alert Box');
     });
   }
+$scope.reset = function() {
+    if(!$scope.model.tabela){
+      $scope.model = {};
+    
+    }
+}
 
 $scope.submit= function() {
 var verificatab1 = false;
@@ -75,7 +80,7 @@ var financiamento = new Financiamento($scope.model);
       }
 })
 
-.controller('AmortizacaoCtrl', function($scope,$ionicPopup){
+.controller('amortizacaoCtrl', function($scope,$ionicPopup){
   $scope.mod = {
     saldoDevedor: '',
     juros: '',
@@ -185,8 +190,16 @@ var financiamento = new Financiamento($scope.model);
         }
 
 })
-.controller('AjudaCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
+.controller('ajudaCtrl', function($scope,$state) {
+
+
+})
+
+.controller('tabelasCtrl', function($scope,$stateParams,$ionicHistory) {
+  console.log($stateParams.movieid);
+  $scope.goBack = function(){
+    window.history.back();
+
+  }
+
 });
