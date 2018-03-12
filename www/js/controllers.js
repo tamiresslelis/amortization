@@ -36,7 +36,7 @@ $scope.paraAmortizacao = function(){
 $scope.reset = function() {
     if(!$scope.model.tabela){
       $scope.model = {};
-    
+
     }
 }
 
@@ -95,6 +95,12 @@ var financiamento = new Financiamento($scope.model);
     somaPrestacoes: 0
 
   };
+  $scope.reset = function() {
+      if(!$scope.mod.tabela){
+        $scope.mod = {};
+
+      }
+  }
   $scope.mascaraAmort = function() {
     $('#currency').maskMoney();
 
