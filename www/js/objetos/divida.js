@@ -514,7 +514,8 @@ var Divida = (function(){
 
 function getMoney( str )
 {
-        return parseInt( str.replace(/[\D]+/g,'') );
+        str = str.replace(/[\D]+/g,'');
+        return parseInt( str );
 }
 
 function formatReal( int )
