@@ -33,17 +33,31 @@ padding: 0;}
 .padding h2{
   text-align: center;
   padding: 30px;
+  padding-bottom: 0px;
 }
 .padding h6{
    text-align: center;
    padding: 25px;
+   padding-top: 5px;
+padding-bottom: 5px;
    color: blue;
-   background-color: #F2FFFC;
-   opacity: 0.5;
+  background-color: #F2FFFC;
+   opacity: 0.8;
 }
 form{
   text-align: left;
+
 }
+.conteudo{
+  height: 100%;
+  background-image: url("../img/money.jpg") ;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+.buttons{
+  padding-top: 90px;
+}
+
 
 #menu{
   width: 720px;
@@ -82,11 +96,14 @@ form{
     background-repeat: no-repeat;
     background-position: center;
 }
+
 @media  only screen and (max-width: 320px){
-  .img{
-    width: 90%;
+  .conteudo{
+    background-image: url("../img/money.jpg") ;
+    background-repeat: no-repeat;
+    background-position: center;
 
-
+}
 }
 a{
   text-align: center;

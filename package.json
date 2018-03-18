@@ -31,7 +31,7 @@
   "dependencies": {
     "@ionic/discover": "^0.4.0",
     "angular-input-masks": "^4.1.0",
-    "cordova-android": "^6.3.0",
+    "cordova-android": "6.2.3",
     "cordova-browser": "~5.0.2",
     "cordova-plugin-crosswalk-webview": "^2.4.0",
     "cordova-plugin-device": "^1.1.4",
