@@ -37,6 +37,7 @@ $scope.reset = function() {
     if(!$scope.model.tabela){
       $scope.model = {};
 
+
     }
 }
 
