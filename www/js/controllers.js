@@ -136,7 +136,7 @@ var financiamento = new Financiamento($scope.model);
 
     var divida = new Divida($scope.mod);
     console.log("O peridodo"+$scope.mod.faltam);
-    if(($scope.mod.saldoDevedor == "") || ( $scope.mod.faltam == undefined) ){
+    if(($scope.mod.saldoDevedor == "") || ( $scope.mod.faltam == undefined)  || ($scope.mod.juros== 0) || ($scope.mod.tabela == "none") || ($scope.mod.faltam==0)){
               $scope.alert('Ops!','Por favor, preencha todos os campos!');
     }else{
               //se alguma opcao diminuir estiver verdadeira

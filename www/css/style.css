@@ -22,19 +22,29 @@ padding: 0;}
   background-color: #33cd5f;
   border-color:  #33cd5f;
 }
-.content-inicio{
-  background: rgba(255, 255, 255, 0.7);
-  padding: 25px;
-  margin: 0px;
+.padding {
 
+  text-align: center;
+  /*background-image: url("../img/money.jpg") ;
+  background-repeat: no-repeat;
+  background-position: center;
+*/
 }
-
-.content-inicio h2,h6{
+.padding h2{
+  text-align: center;
+  padding: 30px;
+}
+.padding h6{
    text-align: center;
    padding: 25px;
-   margin: 0px;
-
+   color: blue;
+   background-color: #F2FFFC;
+   opacity: 0.5;
 }
+form{
+  text-align: left;
+}
+
 #menu{
   width: 720px;
   margin: auto;
@@ -62,7 +72,21 @@ padding: 0;}
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100%;*/
-  background-color: #F2FFFC;
+  /*background-color: #F2FFFC;*/
+}
+/*** foto mobile**/
+.imagem{
+    text-align: center;
+    background-image: url("../img/money.jpg") ;
+    height: 800px;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+@media  only screen and (max-width: 320px){
+  .img{
+    width: 90%;
+
+
 }
 a{
   text-align: center;
