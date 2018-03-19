@@ -91,9 +91,5 @@
         <variable name="XWALK_MULTIPLEAPK" value="true" />
     </plugin>
     <engine name="browser" spec="~5.0.2" />
-<<<<<<< HEAD
-    <engine name="android" spec="^6.3.0" />
-=======
     <engine name="android" spec="6.2.3" />
->>>>>>> 3a62a31a1f4ca6c7c50c68fe52acd8bc1a8ddc8e
 </widget>
