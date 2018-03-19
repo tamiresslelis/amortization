@@ -6,6 +6,10 @@ padding: 0;}
 .texto{
   text-align: justify;
 }
+.title{
+  text-align: center;
+
+}
 .table-responsive-sm{
   margin-top: 15px;
 }
