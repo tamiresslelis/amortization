@@ -8,6 +8,9 @@ $scope.paraFinanciamento = function(){
 $scope.paraAmortizacao = function(){
     $state.go('tab.amortizacao');
 }
+$scope.paraAjuda = function(){
+    $state.go('tab.ajuda');
+}
 
 })
 

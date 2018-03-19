@@ -3,7 +3,9 @@
 *{
 margin: 0;
 padding: 0;}
-
+.texto{
+  text-align: justify;
+}
 .table-responsive-sm{
   margin-top: 15px;
 }
@@ -22,6 +24,12 @@ padding: 0;}
   background-color: #33cd5f;
   border-color:  #33cd5f;
 }
+.item-divider{
+  background-color:purple ;
+  color:white;
+  font-size: 16px;
+}
+
 .padding {
 
   text-align: center;
@@ -29,6 +37,19 @@ padding: 0;}
   background-repeat: no-repeat;
   background-position: center;
 */
+}
+.padding h3{
+  text-align: left;
+  padding: 15px;
+  padding-bottom: 0px;
+  color:gray;
+}
+.padding h5{
+  text-align: left;
+
+  padding: 15px;
+  padding-bottom: 0px;
+  color:black;
 }
 .padding h2{
   text-align: center;
@@ -111,7 +132,4 @@ a{
 
 footer{
   text-align: center;
-}
-.padding p,h3{
-  color:gray;
 }
