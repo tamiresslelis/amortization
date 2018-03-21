@@ -47,7 +47,7 @@
 <br />
 
       <thead ng-show="grid.length">
-        <div class="alert alert-warning" role="alert" ng-repeat="g in grid" ng-if="$last">
+        <div class="alert alert-warning" role="alert" ng-repeat="g in grid" ng-if="$last" >
           <p class="texto">
             Hoje, o valor da prestação a pagar é:<strong> R$ {{g.totalHoje}}</strong>.<br />
             Que é a soma da prestação no período <strong> 1 </strong> de valor igual a <strong> R$ {{g.hoje}}</strong> , mais o valor da amortização extra igual a <strong>{{mod.AmortizacaoExtra}} </strong>.
