@@ -3,7 +3,7 @@ App em Ionic desenvolvido no Trabalho de Conclusão de Curso realizado no curso 
 Monografia completa aqui: 
 [monografia_tamires_lelis.pdf](https://github.com/tamiresslelis/amortization/files/2070258/monografia_tamires_lelis.pdf)
 
-- Abstract
+
 
 ![english](https://user-images.githubusercontent.com/11637487/40946654-0fd50ce6-6835-11e8-9fa7-c6db9af653dd.PNG)
 
