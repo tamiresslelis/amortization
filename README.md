@@ -2,6 +2,10 @@
 App em Ionic desenvolvido no Trabalho de Conclusão de Curso realizado no curso de Engenharia de Computação do CEFET-MG Campus Timóteo.
 Monografia completa aqui: 
 [monografia_tamires_lelis.pdf](https://github.com/tamiresslelis/amortization/files/2070258/monografia_tamires_lelis.pdf)
+
+- Abstract
+![english](https://user-images.githubusercontent.com/11637487/40946654-0fd50ce6-6835-11e8-9fa7-c6db9af653dd.PNG)
+
 - Início
 
 ![1](https://user-images.githubusercontent.com/11637487/37570876-5bc0cad0-2ad4-11e8-9fbb-e35c0f78751c.PNG)
