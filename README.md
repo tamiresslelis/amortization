@@ -1,6 +1,6 @@
 # amortization
 App em Ionic desenvolvido no Trabalho de Conclusão de Curso realizado no curso de Engenharia de Computação do CEFET-MG Campus Timóteo.
-
+Monografia completa aqui: [monografia_tamires_lelis.pdf]
 - Início
 
 ![1](https://user-images.githubusercontent.com/11637487/37570876-5bc0cad0-2ad4-11e8-9fbb-e35c0f78751c.PNG)
