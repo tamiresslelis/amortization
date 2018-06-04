@@ -9,7 +9,7 @@ Monografia completa aqui:
 
 - Início
 
-![1](https://user-images.githubusercontent.com/11637487/37570876-5bc0cad0-2ad4-11e8-9fbb-e35c0f78751c.PNG)
+![1](https://user-images.githubusercontent.com/11637487/40946750-a0b64c7a-6835-11e8-8277-afdaa2339f97.PNG)
 
 
 - Tela Financiamento
